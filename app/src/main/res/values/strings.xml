@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Flickr</string>
+    <string name="untitled">(Untitled)</string>
+    <string name="action_search">Search</string>
+    <string name="screen_latest">Latest</string>
+    <string name="screen_search">Search</string>
+</resources>
