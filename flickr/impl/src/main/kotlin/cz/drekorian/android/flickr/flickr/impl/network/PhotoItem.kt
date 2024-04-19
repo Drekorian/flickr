@@ -15,4 +15,3 @@ internal class Photo(
     @JsonNames("author_id") val authorId: String,
     val tags: String,
 )
-
