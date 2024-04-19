@@ -1,8 +1,10 @@
 package cz.drekorian.android.flickr.ui.controls.latest
 
+import cz.drekorian.android.flickr.BaseTest
 import cz.drekorian.android.flickr.domain.DisplayMode
 import cz.drekorian.android.flickr.domain.SettingsLocalDataSource
 import cz.drekorian.android.flickr.flickr.api.IFlickrRepository
+import cz.drekorian.android.flickr.flickr.api.Result
 import cz.drekorian.android.flickr.flickr.api.domain.PhotoInfo
 import cz.drekorian.android.flickr.flickr.api.domain.usecase.IGetLatestPhotosUseCase
 import io.mockk.coEvery
@@ -10,19 +12,16 @@ import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.TestResult
-import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
-import kotlin.test.assertTrue
+import kotlin.test.assertEquals
 
 @OptIn(ExperimentalCoroutinesApi::class)
-internal class LatestViewModelTest {
+internal class LatestViewModelTest :
+    BaseTest() {
 
     private val mockPhotoInfo: PhotoInfo = mockk()
-    private val testScope: TestScope = TestScope()
 
     // class under test
     private val flickrRepository: IFlickrRepository = mockk(relaxed = true)
@@ -32,7 +31,7 @@ internal class LatestViewModelTest {
     }
 
     private val getLatestPhotosUseCase: IGetLatestPhotosUseCase = mockk {
-        coEvery { this@mockk.invoke() } returns mockPhotoInfo
+        coEvery { this@mockk.invoke() } returns Result.Success(mockPhotoInfo)
     }
 
     private val viewModel: LatestViewModel = LatestViewModel(
@@ -42,22 +41,16 @@ internal class LatestViewModelTest {
     )
 
     @Test
-    fun `when fetch() called then photos are emitted`() = runBlockingTest {
+    fun `when fetch() called then photos are emitted`() = runTest {
 
         // given
-        junit.framework.Assert.assertTrue(viewModel.photos.value == PhotoInfo.empty)
+        assertEquals(viewModel.photos.value, PhotoInfo.empty)
 
         // when
         viewModel.refresh()
-        testScope.runCurrent()
+        runCurrent()
 
         // then
-        junit.framework.Assert.assertTrue(viewModel.photos.value == mockPhotoInfo)
-    }
-
-    private fun runBlockingTest(
-        body: suspend TestScope.() -> Unit,
-    ): TestResult = testScope.runTest {
-        body()
+        assertEquals(viewModel.photos.value, mockPhotoInfo)
     }
 }
