@@ -4,7 +4,6 @@ import android.app.Application
 import coil.Coil
 import coil.ImageLoader
 import okhttp3.OkHttpClient
-import org.koin.android.BuildConfig
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.KoinApplication
