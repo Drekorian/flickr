@@ -30,7 +30,7 @@ ktor = "2.3.10"
 espresso = "3.4.0"
 junit = "4.13.2"
 testExtJunit = "1.1.3"
-mockk = "1.12.4"
+mockk = "1.13.10"
 
 [libraries]
 
