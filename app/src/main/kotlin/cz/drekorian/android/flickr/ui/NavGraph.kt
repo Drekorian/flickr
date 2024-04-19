@@ -1,5 +1,6 @@
 package cz.drekorian.android.flickr.ui
 
+import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.navigation.NavBackStackEntry
@@ -29,7 +30,7 @@ internal fun NavGraph(
 
 private fun NavGraphBuilder.route(
     route: String,
-    content: @Composable (NavBackStackEntry) -> Unit,
+    content: @Composable AnimatedContentScope.(NavBackStackEntry) -> Unit,
 ) {
     composable(route = route, content = content)
 }
