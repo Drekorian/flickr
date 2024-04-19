@@ -19,6 +19,7 @@ internal class PhotoMapper {
     private fun from(photoNetwork: PhotoNetwork) = Photo(
         title = photoNetwork.title,
         link = photoNetwork.link,
+        dateTaken = photoNetwork.dateTaken,
         media = photoNetwork.media,
         description = photoNetwork.description,
         published = photoNetwork.published,
