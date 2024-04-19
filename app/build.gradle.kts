@@ -7,6 +7,10 @@ android {
     namespace = "cz.drekorian.android.flickr"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     defaultConfig {
         applicationId = "cz.drekorian.android.flickr"
         minSdk = libs.versions.minSdk.get().toInt()
