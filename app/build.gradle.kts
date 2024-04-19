@@ -91,5 +91,5 @@ dependencies {
 
     androidTestImplementation(libs.androidx.compose.tests)
     androidTestImplementation(libs.androidx.test.junit)
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
