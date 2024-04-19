@@ -13,7 +13,7 @@ kotlin = "1.9.23"
 # Third party libraries
 
 accompanist = "0.25.0"
-androidxActivity = "1.5.1"
+androidxArchCore = "2.2.0"
 androidxCoreKtx = "1.8.0"
 androidxDataStore = "1.0.0"
 androidxLifecycle = "2.5.1"
@@ -35,6 +35,7 @@ mockk = "1.13.10"
 [libraries]
 
 accompanist-swipeRefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanist" }
+androidx-arch-core-testing = { module = "androidx.arch.core:core-testing", version.ref = "androidxArchCore" }
 androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidxActivity" }
 androidx-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 androidx-compose-uiTestManifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose" }

@@ -84,6 +84,7 @@ dependencies {
     debugImplementation(libs.androidx.compose.uiTooling)
     debugImplementation(libs.androidx.compose.uiTestManifest)
 
+    testImplementation(libs.androidx.arch.core.testing)
     testImplementation(libs.junit)
     testImplementation(libs.koin.test)
     testImplementation(libs.mockk)
