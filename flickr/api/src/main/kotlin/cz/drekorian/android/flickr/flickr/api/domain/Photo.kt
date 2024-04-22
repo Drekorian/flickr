@@ -1,8 +1,10 @@
 package cz.drekorian.android.flickr.flickr.api.domain
 
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonNames
 
+@OptIn(ExperimentalSerializationApi::class)
 @Serializable
 data class Photo(
     val title: String,
