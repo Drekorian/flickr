@@ -27,7 +27,7 @@ kotlinxCoroutinesAndroid = "1.8.1"
 kotlinxSerialization = "1.7.1"
 ktor = "2.3.12"
 
-espresso = "3.6.0"
+espresso = "3.6.1"
 junit = "4.13.2"
 testExtJunit = "1.2.1"
 mockk = "1.13.11"
