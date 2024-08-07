@@ -8,7 +8,7 @@ minSdk = "21"
 targetSdk = "34"
 
 # Kotlin
-kotlin = "2.0.0"
+kotlin = "2.0.10"
 
 # Third party libraries
 
