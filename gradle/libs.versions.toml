@@ -13,7 +13,7 @@ kotlin = "2.0.20"
 # Third party libraries
 
 accompanist = "0.34.0"
-androidxActivity = "1.9.1"
+androidxActivity = "1.9.2"
 androidxArchCore = "2.2.0"
 androidxCoreKtx = "1.13.1"
 androidxDataStore = "1.1.1"
