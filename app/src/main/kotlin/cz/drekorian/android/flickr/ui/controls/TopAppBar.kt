@@ -5,8 +5,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.SmallTopAppBar
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import cz.drekorian.android.flickr.R
 import cz.drekorian.android.flickr.domain.DisplayMode
 import cz.drekorian.android.flickr.ui.theme.FlickrTheme
-import org.koin.androidx.compose.getViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 internal fun TopAppBar(
@@ -26,7 +26,7 @@ internal fun TopAppBar(
     modifier: Modifier = Modifier,
 ) {
     TopAppBar(
-        viewModel = getViewModel(),
+        viewModel = koinViewModel(),
         title = title,
         modifier = modifier,
     )
@@ -54,7 +54,7 @@ private fun TopAppBar(
     modifier: Modifier,
     onActionClick: () -> Unit,
 ) {
-    SmallTopAppBar(
+    TopAppBar(
         title = { Text(title) },
         actions = {
             if (displayMode != null) {
