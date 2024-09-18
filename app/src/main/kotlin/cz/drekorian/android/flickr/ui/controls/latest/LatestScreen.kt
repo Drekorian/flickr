@@ -24,7 +24,7 @@ import cz.drekorian.android.flickr.ui.controls.PhotosGrid
 import cz.drekorian.android.flickr.ui.controls.PhotosList
 import cz.drekorian.android.flickr.ui.controls.TopAppBar
 import cz.drekorian.android.flickr.ui.plus
-import org.koin.androidx.compose.getViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 internal fun LatestScreen(
@@ -32,7 +32,7 @@ internal fun LatestScreen(
     navBackStackEntry: NavBackStackEntry,
 ) {
     LatestScreen(
-        viewModel = getViewModel(),
+        viewModel = koinViewModel(),
         actions = actions,
         navBackStackEntry = navBackStackEntry,
     )

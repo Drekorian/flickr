@@ -30,8 +30,7 @@ import cz.drekorian.android.flickr.ui.controls.BottomBar
 import cz.drekorian.android.flickr.ui.controls.PhotosGrid
 import cz.drekorian.android.flickr.ui.controls.PhotosList
 import cz.drekorian.android.flickr.ui.controls.TopAppBar
-import cz.drekorian.android.flickr.ui.plus
-import org.koin.androidx.compose.getViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 internal fun SearchScreen(
@@ -39,7 +38,7 @@ internal fun SearchScreen(
     navBackStackEntry: NavBackStackEntry,
 ) {
     SearchScreen(
-        viewModel = getViewModel(),
+        viewModel = koinViewModel(),
         actions = actions,
         navBackStackEntry = navBackStackEntry,
     )
