@@ -29,11 +29,15 @@ class LatestViewModel(
     fun refresh() {
         viewModelScope.launch {
             _isRefreshing.value = true
-            val result = getLatestPhotosUseCase()
-            if (result is Success) {
-                _photos.value = result.value
-            }
+            fetch()
             _isRefreshing.value = false
+        }
+    }
+
+    suspend fun fetch() {
+        val result = getLatestPhotosUseCase()
+        if (result is Success) {
+            _photos.value = result.value
         }
     }
 }

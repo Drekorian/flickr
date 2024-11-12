@@ -35,21 +35,25 @@ class SearchViewModel(
     init {
         _searchTerm
             .debounce(300)
-            .onEach { refresh() }
+            .onEach { fetch() }
             .launchIn(viewModelScope)
     }
 
     fun refresh() {
         viewModelScope.launch {
             _isRefreshing.value = true
-            val result = searchPhotosUseCase(
-                tags = _searchTerm.value.trimEnd().split(" ")
-            )
-
-            if (result is Success) {
-                _photos.value = result.value
-            }
+            fetch()
             _isRefreshing.value = false
+        }
+    }
+
+    suspend fun fetch() {
+        val result = searchPhotosUseCase(
+            tags = _searchTerm.value.trimEnd().split(" ")
+        )
+
+        if (result is Success) {
+            _photos.value = result.value
         }
     }
 

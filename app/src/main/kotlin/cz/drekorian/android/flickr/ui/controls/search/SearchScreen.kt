@@ -13,13 +13,12 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavBackStackEntry
 import cz.drekorian.android.flickr.R
 import cz.drekorian.android.flickr.domain.DisplayMode
@@ -58,16 +57,16 @@ private fun SearchScreen(
             )
         }
     ) { contentPadding ->
-        val isRefreshing by viewModel.isRefreshing.collectAsState()
+        val isRefreshing by viewModel.isRefreshing.collectAsStateWithLifecycle()
 
         PullToRefreshBox(
             isRefreshing = isRefreshing,
             onRefresh = viewModel::refresh,
             modifier = Modifier.padding(contentPadding),
         ) {
-            val displayMode by remember { viewModel.displayMode }.collectAsState(initial = null)
-            val photoInfo by remember { viewModel.photos }.collectAsState()
-            val searchTerm by remember { viewModel.searchTerm }.collectAsState()
+            val displayMode by viewModel.displayMode.collectAsStateWithLifecycle(initialValue = null)
+            val photoInfo by viewModel.photos.collectAsStateWithLifecycle()
+            val searchTerm by viewModel.searchTerm.collectAsStateWithLifecycle()
 
             val currentDisplayMode = displayMode
             if (currentDisplayMode != null) {

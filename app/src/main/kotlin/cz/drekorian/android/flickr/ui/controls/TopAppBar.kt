@@ -8,13 +8,13 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cz.drekorian.android.flickr.R
 import cz.drekorian.android.flickr.domain.DisplayMode
 import cz.drekorian.android.flickr.ui.theme.FlickrTheme
@@ -38,7 +38,7 @@ private fun TopAppBar(
     title: String,
     modifier: Modifier,
 ) {
-    val displayMode by viewModel.displayMode.collectAsState(initial = null)
+    val displayMode by viewModel.displayMode.collectAsStateWithLifecycle(initialValue = null)
     TopAppBar(
         displayMode = displayMode,
         title = title,
