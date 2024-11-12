@@ -1,9 +1,11 @@
 package cz.drekorian.android.flickr.ui.controls.latest
 
 import androidx.compose.animation.Crossfade
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -11,10 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavBackStackEntry
-import com.google.accompanist.swiperefresh.SwipeRefresh
-import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import cz.drekorian.android.flickr.R
 import cz.drekorian.android.flickr.domain.DisplayMode
 import cz.drekorian.android.flickr.flickr.api.domain.PhotoInfo
@@ -23,7 +22,6 @@ import cz.drekorian.android.flickr.ui.controls.BottomBar
 import cz.drekorian.android.flickr.ui.controls.PhotosGrid
 import cz.drekorian.android.flickr.ui.controls.PhotosList
 import cz.drekorian.android.flickr.ui.controls.TopAppBar
-import cz.drekorian.android.flickr.ui.plus
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -53,12 +51,13 @@ internal fun LatestScreen(
             )
         }
     ) { contentPadding ->
-        val isRefreshing by remember(viewModel) { viewModel.isRefreshing }.collectAsState()
+        val isRefreshing by viewModel.isRefreshing.collectAsState()
 
-        SwipeRefresh(
-            state = rememberSwipeRefreshState(isRefreshing),
+        PullToRefreshBox(
+            isRefreshing = isRefreshing,
             onRefresh = viewModel::refresh,
-            indicatorPadding = contentPadding,
+            state = rememberPullToRefreshState(),
+            modifier = Modifier.padding(contentPadding),
         ) {
             val photoInfo by remember { viewModel.photos }.collectAsState()
             val displayMode by remember { viewModel.displayMode }.collectAsState(initial = null)
@@ -68,7 +67,6 @@ internal fun LatestScreen(
                 LatestScreenContent(
                     displayMode = currentDisplayMode,
                     photoInfo = photoInfo,
-                    contentPadding = contentPadding,
                 )
             }
         }
@@ -83,23 +81,20 @@ internal fun LatestScreen(
 private fun LatestScreenContent(
     displayMode: DisplayMode,
     photoInfo: PhotoInfo,
-    contentPadding: PaddingValues,
 ) {
     Crossfade(
-        targetState = displayMode
+        targetState = displayMode,
+        label = "displayMode",
     ) { mode ->
-        val adjustedContentPadding = contentPadding + PaddingValues(16.dp)
         when (mode) {
             DisplayMode.Grid -> PhotosGrid(
                 photos = photoInfo.items,
                 modifier = Modifier.fillMaxSize(),
-                contentPadding = adjustedContentPadding,
             )
 
             DisplayMode.List -> PhotosList(
                 photos = photoInfo.items,
                 modifier = Modifier.fillMaxSize(),
-                contentPadding = adjustedContentPadding,
             )
         }
     }

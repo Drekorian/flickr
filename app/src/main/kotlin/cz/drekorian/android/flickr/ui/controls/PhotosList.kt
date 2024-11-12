@@ -36,7 +36,7 @@ import kotlinx.serialization.json.Json
 internal fun PhotosList(
     photos: List<Photo>,
     modifier: Modifier = Modifier,
-    contentPadding: PaddingValues = PaddingValues(),
+    contentPadding: PaddingValues = PaddingValues(16.dp),
     verticalArrangement: Arrangement.Vertical = Arrangement.spacedBy(16.dp),
 ) {
     LazyColumn(

@@ -9,9 +9,6 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.http.appendPathSegments
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 
 internal class FlickrRepository(
     private val client: KtorClient,
@@ -34,14 +31,10 @@ internal class FlickrRepository(
         private const val PARAMETER_VALUE_NO_JSON_CALLBACK_TRUE = "1"
     }
 
-    private val _isLoading = MutableStateFlow(false)
-    override val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
-
     override suspend fun fetch(
         tags: List<String>,
         tagMode: TagMode,
     ): Result<PhotoInfo> {
-        _isLoading.value = true
         val response = client.httpClient.get {
             url {
                 appendPathSegments("services", "feeds", "photos_public.gne")
@@ -55,7 +48,6 @@ internal class FlickrRepository(
             parameter(PARAMETER_NAME_TAGS, tags.joinToString(separator = ","))
         }
 
-        _isLoading.value = false
         return Result.Success(mapper.from(response.body()))
     }
 }

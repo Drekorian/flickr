@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cz.drekorian.android.flickr.domain.DisplayMode
 import cz.drekorian.android.flickr.domain.SettingsLocalDataSource
-import cz.drekorian.android.flickr.flickr.api.IFlickrRepository
 import cz.drekorian.android.flickr.flickr.api.Result.Success
 import cz.drekorian.android.flickr.flickr.api.domain.PhotoInfo
 import cz.drekorian.android.flickr.flickr.api.domain.usecase.ISearchPhotosUseCase
@@ -18,7 +17,6 @@ import kotlinx.coroutines.launch
 
 class SearchViewModel(
     settingsLocalDataSource: SettingsLocalDataSource,
-    flickrRepository: IFlickrRepository,
     private val searchPhotosUseCase: ISearchPhotosUseCase,
 ) :
     ViewModel() {
@@ -28,7 +26,8 @@ class SearchViewModel(
     private val _searchTerm = MutableStateFlow("")
     val searchTerm = _searchTerm.asStateFlow()
 
-    val isRefreshing = flickrRepository.isLoading
+    private val _isRefreshing = MutableStateFlow(false)
+    val isRefreshing = _isRefreshing.asStateFlow()
 
     private val _photos = MutableStateFlow(PhotoInfo.empty)
     val photos = _photos.asStateFlow()
@@ -42,6 +41,7 @@ class SearchViewModel(
 
     fun refresh() {
         viewModelScope.launch {
+            _isRefreshing.value = true
             val result = searchPhotosUseCase(
                 tags = _searchTerm.value.trimEnd().split(" ")
             )
@@ -49,6 +49,7 @@ class SearchViewModel(
             if (result is Success) {
                 _photos.value = result.value
             }
+            _isRefreshing.value = false
         }
     }
 

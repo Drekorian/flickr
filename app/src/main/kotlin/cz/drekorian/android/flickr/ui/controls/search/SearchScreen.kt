@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -20,8 +21,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavBackStackEntry
-import com.google.accompanist.swiperefresh.SwipeRefresh
-import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import cz.drekorian.android.flickr.R
 import cz.drekorian.android.flickr.domain.DisplayMode
 import cz.drekorian.android.flickr.flickr.api.domain.PhotoInfo
@@ -59,12 +58,12 @@ private fun SearchScreen(
             )
         }
     ) { contentPadding ->
-        val isRefreshing by remember { viewModel.isRefreshing }.collectAsState()
+        val isRefreshing by viewModel.isRefreshing.collectAsState()
 
-        SwipeRefresh(
-            state = rememberSwipeRefreshState(isRefreshing),
+        PullToRefreshBox(
+            isRefreshing = isRefreshing,
             onRefresh = viewModel::refresh,
-            indicatorPadding = contentPadding,
+            modifier = Modifier.padding(contentPadding),
         ) {
             val displayMode by remember { viewModel.displayMode }.collectAsState(initial = null)
             val photoInfo by remember { viewModel.photos }.collectAsState()
@@ -73,7 +72,6 @@ private fun SearchScreen(
             val currentDisplayMode = displayMode
             if (currentDisplayMode != null) {
                 SearchScreenContent(
-                    contentPadding = contentPadding,
                     displayMode = currentDisplayMode,
                     photoInfo = photoInfo,
                     searchTerm = searchTerm,
@@ -86,7 +84,6 @@ private fun SearchScreen(
 
 @Composable
 private fun SearchScreenContent(
-    contentPadding: PaddingValues,
     displayMode: DisplayMode,
     photoInfo: PhotoInfo,
     searchTerm: String,
@@ -94,7 +91,6 @@ private fun SearchScreenContent(
 ) {
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
-        modifier = Modifier.padding(contentPadding),
     ) {
         SearchField(
             searchTerm = searchTerm,
@@ -102,7 +98,8 @@ private fun SearchScreenContent(
         )
 
         Crossfade(
-            targetState = displayMode
+            targetState = displayMode,
+            label = "displayMode",
         ) { mode ->
             when (mode) {
                 DisplayMode.Grid -> PhotosGrid(

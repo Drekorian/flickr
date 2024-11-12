@@ -54,7 +54,6 @@ dependencies {
     implementation(project(":flickr:impl"))
     implementation(project(":shared"))
 
-    implementation(libs.accompanist.swipeRefresh)
     implementation(libs.androidx.activityCompose)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.ui)

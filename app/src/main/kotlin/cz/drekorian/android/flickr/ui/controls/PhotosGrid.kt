@@ -25,7 +25,6 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.core.text.parseAsHtml
-import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import cz.drekorian.android.flickr.activity.PhotoActivity
@@ -38,7 +37,7 @@ internal fun PhotosGrid(
     photos: List<Photo>,
     columns: Int = 3,
     modifier: Modifier = Modifier,
-    contentPadding: PaddingValues = PaddingValues(),
+    contentPadding: PaddingValues = PaddingValues(16.dp),
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(columns),
