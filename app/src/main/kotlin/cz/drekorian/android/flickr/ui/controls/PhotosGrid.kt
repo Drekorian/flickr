@@ -66,7 +66,7 @@ internal fun PhotosGrid(
                                 )
                             )
                         }
-                        .animateItemPlacement(),
+                        .animateItem(),
                 ) {
                     Image(
                         painter = rememberAsyncImagePainter(

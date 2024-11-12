@@ -64,7 +64,7 @@ internal fun PhotosList(
                                     )
                                 )
                             }
-                            .animateItemPlacement(),
+                            .animateItem(),
                     ) {
                         Image(
                             painter = rememberAsyncImagePainter(
