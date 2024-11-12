@@ -3,7 +3,6 @@ package cz.drekorian.android.flickr.ui.controls.latest
 import cz.drekorian.android.flickr.BaseTest
 import cz.drekorian.android.flickr.domain.DisplayMode
 import cz.drekorian.android.flickr.domain.SettingsLocalDataSource
-import cz.drekorian.android.flickr.flickr.api.IFlickrRepository
 import cz.drekorian.android.flickr.flickr.api.Result
 import cz.drekorian.android.flickr.flickr.api.domain.PhotoInfo
 import cz.drekorian.android.flickr.flickr.api.domain.usecase.IGetLatestPhotosUseCase
@@ -23,9 +22,6 @@ internal class LatestViewModelTest :
 
     private val mockPhotoInfo: PhotoInfo = mockk()
 
-    // class under test
-    private val flickrRepository: IFlickrRepository = mockk(relaxed = true)
-
     private val settingsLocalDataSource: SettingsLocalDataSource = mockk {
         every { displayMode } returns flowOf(DisplayMode.Grid)
     }
@@ -34,8 +30,8 @@ internal class LatestViewModelTest :
         coEvery { this@mockk.invoke() } returns Result.Success(mockPhotoInfo)
     }
 
+    // class under test
     private val viewModel: LatestViewModel = LatestViewModel(
-        flickrRepository = flickrRepository,
         settingsLocalDataSource = settingsLocalDataSource,
         getLatestPhotosUseCase = getLatestPhotosUseCase,
     )
