@@ -3,18 +3,16 @@ plugins {
     alias(libs.plugins.kotlin.android)
 }
 
+kotlin {
+    jvmToolchain(JavaVersion.VERSION_17.majorVersion.toInt())
+}
+
 android {
     namespace = "cz.drekorian.android.flickr.shared"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     kotlinOptions {
-        jvmTarget = "1.8"
         moduleName = "cz.drekorian.android.flickr.shared"
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
 
