@@ -1,7 +1,7 @@
 [versions]
 
 # Android SDK
-agp = "8.8.1"
+agp = "8.8.2"
 buildTools = "35.0.0"
 compileSdk = "35"
 minSdk = "21"
