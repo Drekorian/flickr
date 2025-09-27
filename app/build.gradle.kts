@@ -6,18 +6,26 @@ plugins {
 
 kotlin {
     jvmToolchain(JavaVersion.VERSION_17.majorVersion.toInt())
+    compilerOptions {
+        moduleName = "cz.drekorian.android.flickr"
+        freeCompilerArgs.addAll(
+            "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api",
+            "-opt-in=androidx.compose.foundation.ExperimentalFoundationApi",
+            "-opt-in=kotlinx.coroutines.FlowPreview",
+        )
+    }
 }
 
 android {
-    namespace = "cz.drekorian.android.flickr"
     compileSdk = libs.versions.compileSdk.get().toInt()
+    namespace = kotlin.compilerOptions.moduleName.get()
 
     buildFeatures {
         buildConfig = true
     }
 
     defaultConfig {
-        applicationId = "cz.drekorian.android.flickr"
+        applicationId = kotlin.compilerOptions.moduleName.get()
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1
@@ -38,14 +46,6 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
-
-    kotlinOptions {
-        freeCompilerArgs = freeCompilerArgs + listOf(
-            "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api",
-            "-opt-in=androidx.compose.foundation.ExperimentalFoundationApi",
-            "-opt-in=kotlinx.coroutines.FlowPreview",
-        )
-    }
 }
 
 dependencies {
@@ -53,6 +53,7 @@ dependencies {
     implementation(project(":shared"))
 
     implementation(libs.androidx.activityCompose)
+    implementation(libs.androidx.compose.material.icons.core)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.uiToolingPreview)

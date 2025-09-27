@@ -8,16 +8,16 @@ kotlin {
     jvmToolchain(JavaVersion.VERSION_17.majorVersion.toInt())
 }
 
-android {
-    namespace = "cz.drekorian.android.flickr.flickr.impl"
-    compileSdk = libs.versions.compileSdk.get().toInt()
-
-    kotlinOptions {
+kotlin {
+    compilerOptions {
         moduleName = "cz.drekorian.android.flickr.flickr.impl"
-        freeCompilerArgs = freeCompilerArgs + listOf(
-            "-opt-in=kotlinx.serialization.ExperimentalSerializationApi",
-        )
+        freeCompilerArgs.add("-opt-in=kotlinx.serialization.ExperimentalSerializationApi")
     }
+}
+
+android {
+    compileSdk = libs.versions.compileSdk.get().toInt()
+    namespace = kotlin.compilerOptions.moduleName.get()
 }
 
 dependencies {
