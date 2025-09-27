@@ -5,18 +5,17 @@ plugins {
 
 kotlin {
     jvmToolchain(JavaVersion.VERSION_17.majorVersion.toInt())
-}
-
-android {
-    namespace = "cz.drekorian.android.flickr.shared"
-    compileSdk = libs.versions.compileSdk.get().toInt()
-
-    kotlinOptions {
+    compilerOptions {
         moduleName = "cz.drekorian.android.flickr.shared"
     }
 }
 
+android {
+    compileSdk = libs.versions.compileSdk.get().toInt()
+    namespace = kotlin.compilerOptions.moduleName.get()
+}
+
 dependencies {
-    implementation(libs.koin)
     implementation(libs.androidx.lifecycle.process)
+    implementation(libs.koin)
 }
