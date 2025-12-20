@@ -12,8 +12,10 @@ android {
     namespace = "cz.drekorian.android.flickr.flickr.api"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
-    kotlinOptions {
-        moduleName = "cz.drekorian.android.flickr.flickr.api"
+    kotlin {
+        compilerOptions {
+            moduleName = "cz.drekorian.android.flickr.flickr.api"
+        }
     }
 }
 
