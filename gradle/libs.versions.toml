@@ -1,7 +1,7 @@
 [versions]
 
 # Android SDK
-agp = "8.13.2"
+agp = "9.0.0"
 buildTools = "36.0.0"
 compileSdk = "36"
 minSdk = "30"
@@ -69,5 +69,4 @@ kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-t
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
