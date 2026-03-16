@@ -14,7 +14,7 @@ kotlin = "2.3.10"
 
 androidxActivity = "1.12.4"
 androidxArchCore = "2.2.0"
-androidxCoreKtx = "1.17.0"
+androidxCoreKtx = "1.18.0"
 androidxDataStore = "1.2.1"
 androidxLifecycle = "2.10.0"
 androidxNavigation = "2.9.7"
