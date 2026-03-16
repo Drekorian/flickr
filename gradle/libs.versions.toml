@@ -12,7 +12,7 @@ kotlin = "2.3.10"
 
 # Third party libraries
 
-androidxActivity = "1.12.4"
+androidxActivity = "1.13.0"
 androidxArchCore = "2.2.0"
 androidxCoreKtx = "1.18.0"
 androidxDataStore = "1.2.1"
