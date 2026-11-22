@@ -17,6 +17,7 @@ kotlin {
 
 android {
     compileSdk = libs.versions.compileSdk.get().toInt()
+    compileSdkMinor = libs.versions.compileSdkMinor.get().toInt()
     namespace = kotlin.compilerOptions.moduleName.get()
 
     buildFeatures {

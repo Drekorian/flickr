@@ -10,6 +10,7 @@ kotlin {
 android {
     namespace = "cz.drekorian.android.flickr.flickr.api"
     compileSdk = libs.versions.compileSdk.get().toInt()
+    compileSdkMinor = libs.versions.compileSdkMinor.get().toInt()
 
     kotlin {
         compilerOptions {
