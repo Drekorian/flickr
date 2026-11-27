@@ -25,7 +25,7 @@ composeMaterial3 = "1.5.0"
 koin = "4.2.2"
 kotlinxCoroutinesAndroid = "1.11.0"
 kotlinxSerialization = "1.13.0"
-ktor = "3.6.1"
+ktor = "3.6.2"
 composeMaterialIconsCore = "1.7.8"
 
 espresso = "3.7.0"
